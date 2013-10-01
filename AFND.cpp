@@ -18,7 +18,7 @@ bloque AFND::procesaPos(NodoAS* pos)
 	if (pos->obtenValor()=='*') {
 		return creaCerraduraEstrella(procesaPos(pos->obtenIzq()));
 	}
-	if (pos->obtenValor()=='*') {
+	if (pos->obtenValor()=='+') {
 		return creaCerraduraPositiva(procesaPos(pos->obtenIzq()));
 	}
 	if (pos->obtenValor()=='|') {
@@ -35,7 +35,7 @@ bloque AFND::creaSimbolo(char a)
 	aux.ini = new NodoAFND();
 	aux.fin = new NodoAFND();
 	aux.ini->agregarTransicion(a,aux.fin);
-	std::cout << "Cree el simbolo " << a << std::endl;
+	//std::cout << "Cree el simbolo " << a << std::endl;
 	return aux;
 }
 bloque AFND::creaConcatenacion(bloque izq, bloque der)
@@ -49,7 +49,7 @@ bloque AFND::creaConcatenacion(bloque izq, bloque der)
 		izq.fin->agregarTransicion(t->obtenSimbolo(),t->obtenDestino());
 	}
 	der.ini->~NodoAFND();
-	std::cout << "Cree la concatenacion" << std::endl;
+	//std::cout << "Cree la concatenacion" << std::endl;
 	return aux;
 }
 bloque AFND::creaOr(bloque izq, bloque der)
