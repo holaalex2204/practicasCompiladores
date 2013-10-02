@@ -96,9 +96,10 @@ void AFND::numera(Nodo* pos)
 }
 void AFND::imprime()
 {
-	std::cout << "Numero de estados: " << estados << std::endl;
-	std::cout << "Estado Inicial: " << thompson.ini->getIdentificador() << std::endl;
-	std::cout << "Estado Final: " << thompson.fin->getIdentificador() << std::endl;
+	std::cout << "El AFND de Thompson tiene las siguientes características:"  << std::endl;
+	std::cout << "\tNumero de estados: " << estados << std::endl;
+	std::cout << "\tEstado Inicial: " << thompson.ini->getIdentificador() << std::endl;
+	std::cout << "\tEstado Final: " << thompson.fin->getIdentificador() << std::endl;
 	imprimeTransiciones(thompson.ini);
 }
 void AFND::imprimeTransiciones(Nodo* pos)
@@ -106,7 +107,7 @@ void AFND::imprimeTransiciones(Nodo* pos)
 	Transicion* t;
 	for (int  i = 0 ; i<pos->cuentaTransiciones(); i++) {
 		t =pos->obtenTransicion(i);
-		std::cout << "Camino de " << pos->getIdentificador() << " a " << t->obtenDestino()->getIdentificador() << " con el símbolo " << t->obtenSimbolo() << std::endl;
+		std::cout << "\tCamino de " << pos->getIdentificador() << " a " << t->obtenDestino()->getIdentificador() << " con el símbolo " << t->obtenSimbolo() << std::endl;
 	}
 	for (int  i = 0 ; i<pos->cuentaTransiciones(); i++) {
 		t =pos->obtenTransicion(i);

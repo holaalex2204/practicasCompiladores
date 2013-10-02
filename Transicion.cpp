@@ -4,7 +4,6 @@ Transicion::Transicion(char simbol, Nodo* destin)
 {
 	simbolo= simbol;
 	destino = destin;
-	std::cout << 1 ;
 }
 Transicion::Transicion(Nodo* destin)
 {
