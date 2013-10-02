@@ -15,6 +15,7 @@ compile: clean
 	g++ -c Transicion.cpp -W -Wall -o Transicion.o
 	g++ -c NodoAFND.cpp -W -Wall -o NodoAFND.o	
 	g++ -c AFND.cpp -W -Wall -o AFND.o
+	g++ -c NodoAFD.cpp -W -Wall -o AFD.o
 	g++ *.o -o practica1.out
 clean:
 	rm -f *.o

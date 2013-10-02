@@ -10,7 +10,7 @@ NodoAFND::~NodoAFND()
 }
 void NodoAFND::agregarTransicion(char simbolo,Nodo* destino)
 {
-	for (std::list<Transicion>::iterator it=transiciones.begin() ; it != transiciones.end() & simbolo!='e'; ++it)
+	for (std::list<Transicion>::iterator it=transiciones.begin() ; (it != transiciones.end()) & (simbolo!='e'); ++it)
 		if (it->obtenSimbolo()==simbolo) {
 				return;
 		}

@@ -26,4 +26,5 @@ class AFND
 	void numera(Nodo* pos);
 	void imprimeTransiciones(Nodo* pos);
 };
+
 #endif
