@@ -7,15 +7,16 @@ class AFD
 {
 	public:
 	
-	explicit AFD(bloque th, std::list<char> s);
+	explicit AFD(AFND* th, std::list<char> s);
 	~AFD();
 	void imprime();
 private:
-	bloque thompson;
+	AFND* thompson;
 	std::list<NodoAFD> nodosGenerados;
 	NodoAFD* contiene(NodoAFD pa);
 	NodoAFD* generaEstados(NodoAFD* pa,char simbolo);
-	std::list<char> simbolos;	
+	std::list<char> simbolos;
+	busca(NodoAFD* pa,char simbolo, NodoAFD* visitados);
 };
 
 #endif

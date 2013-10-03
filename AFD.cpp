@@ -1,6 +1,6 @@
 #include "AFD.h"
 #include <iostream>
-AFD::AFD(bloque th, std::list<char> s)
+AFD::AFD(AFND* th, std::list<char> s)
 {
 	thompson = th;
 }
@@ -23,10 +23,14 @@ NodoAFD* AFD::contiene(NodoAFD pa)
 	}
 	return 0;
 }
+NodoAFD* AFD::busca(NodoAFD* pa,char simbolo, NodoAFD* visitados )
+{
+	
+}
 NodoAFD* AFD::generaEstados(NodoAFD* pa,char simbolo)
 {
 	NodoAFD* temp = new NodoAFD();
 	for (int i = 0; i<pa->tamano(); i++) {
-		<#statements#>
+		busca(pa->obtenElemento(i),simbolo,temp);
 	}
 }
