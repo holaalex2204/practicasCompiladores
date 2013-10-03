@@ -2,7 +2,7 @@ run: compile
 	./practica1.out
 compile: clean
 	clear
-	g++ -c NodoAS.cpp -W -Wall -o NodeAS.o
+	g++ -c NodoAs.cpp -W -Wall -o NodeAS.o
 	g++ -c CerraduraEstAS.cpp -W -Wall -o CerraduraEstAS.o
 	g++ -c CerraduraPosAS.cpp -W -Wall -o CerraduraPosAS.o
 	g++ -c ConcatAS.cpp -W -Wall -o ConcatAS.o

@@ -1,6 +1,6 @@
 #ifndef CERRADURAESTAS_H
 #define CERRADURAESTAS_H 
-#include "NodoAs.h"
+#include "NodoAS.h"
 class CerraduraEstAS: public NodoAS
 {
 	public:
