@@ -23,14 +23,33 @@ NodoAFD* AFD::contiene(NodoAFD pa)
 	}
 	return 0;
 }
-NodoAFD* AFD::busca(NodoAFD* pa,char simbolo, NodoAFD* visitados )
+void AFD::busca(NodoAFND* pa,char simbolo, NodoAFD* visitados )
 {
-	
+	for (int i = 0; i<pa->cuentaTransiciones(); i++) {
+		if (pa->obtenTransicion(i)->obtenSimbolo()==simbolo) {
+			if (!visitados->contiene(pa->obtenTransicion(i)->obtenDestino())) // checa si no se ha visitado ese elemento
+			{
+				visitados->agrega(pa->obtenTransicion(i)->obtenDestino());
+				busca(pa->obtenTransicion(i)->obtenDestino(),simbolo,visitados);
+			}
+		}
+	}
 }
 NodoAFD* AFD::generaEstados(NodoAFD* pa,char simbolo)
 {
 	NodoAFD* temp = new NodoAFD();
 	for (int i = 0; i<pa->tamano(); i++) {
 		busca(pa->obtenElemento(i),simbolo,temp);
+	}
+	for (int i = 0; i<temp->tamano(); i++) {
+		busca(temp->obtenElemento(i),'e',temp); //busca con epsilons a partir de los eodos generados
+	}
+	if (contiene(temp)) //checa si el edo generado ya existe
+	{
+		return contiene(temp);
+	}
+	else
+	{
+		nodosGenerados.insert(nodosGenerados.end(),*temp);
 	}
 }

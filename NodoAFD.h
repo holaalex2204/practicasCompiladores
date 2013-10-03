@@ -9,12 +9,12 @@ class NodoAFD: public Nodo
 	public:
 	explicit NodoAFD();
 	~NodoAFD();
-	bool contiene(NodoAFND* n);
+	bool contiene(Nodo* n);
 	int tamano();
 	void ordena();
-	void agrega(NodoAFND* ob);
+	void agrega(Nodo* ob);
 	NodoAFND* obtenElemento(int n);
-	bool operator== (NodoAFD& param);
+	bool operator== (Nodo& param);
 	private:
 	std::list<NodoAFND> nodosContenidos;
 };

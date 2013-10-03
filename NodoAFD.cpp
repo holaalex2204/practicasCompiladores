@@ -9,7 +9,7 @@ NodoAFD::~NodoAFD()
 {
 	
 }
-bool NodoAFD::contiene(NodoAFND* n)
+bool NodoAFD::contiene(Nodo* n)
 {
 	std::list<NodoAFND>::iterator it;
 	for (it=nodosContenidos.begin(); it!=nodosContenidos.end(); ++it)
@@ -32,17 +32,17 @@ void NodoAFD::ordena()
 {
 	nodosContenidos.sort(Nodo::sortFunc);
 }
-void NodoAFD::agrega(NodoAFND* ob)
+void NodoAFD::agrega(Nodo* ob)
 {
 	if (contiene(ob)) {
 		return;
 	}
 	nodosContenidos.push_back(*ob);
 }
-bool NodoAFD::operator== (NodoAFD& param)
+bool NodoAFD::operator== (Nodo& param)
 {
-	std::list<NodoAFND>::iterator it;
-	std::list<NodoAFND>::iterator it2;
+	std::list<Nodo>::iterator it;
+	std::list<Nodo>::iterator it2;
 	if (param.tamano() != this->tamano()) { // checa si tienen diferente tamaño
 		return false;
 	}
