@@ -11,7 +11,7 @@ NodoAFD::~NodoAFD()
 }
 bool NodoAFD::contiene(Nodo* n)
 {
-	std::list<NodoAFND>::iterator it;
+	std::list<Nodo>::iterator it;
 	for (it=nodosContenidos.begin(); it!=nodosContenidos.end(); ++it)
 		if (n->getIdentificador()==it->getIdentificador()) {
 			return true;
@@ -22,9 +22,9 @@ int NodoAFD::tamano()
 {
 	return nodosContenidos.size();
 }
-NodoAFND* NodoAFD::obtenElemento(int n)
+Nodo* NodoAFD::obtenElemento(int n)
 {
-	std::list<NodoAFND>::iterator it=nodosContenidos.begin();
+	std::list<Nodo>::iterator it=nodosContenidos.begin();
 	advance( it,(n));
 	return &(*it);
 }
@@ -39,7 +39,7 @@ void NodoAFD::agrega(Nodo* ob)
 	}
 	nodosContenidos.push_back(*ob);
 }
-bool NodoAFD::operator== (Nodo& param)
+bool NodoAFD::operator== (NodoAFD& param)
 {
 	std::list<Nodo>::iterator it;
 	std::list<Nodo>::iterator it2;

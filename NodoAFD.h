@@ -13,9 +13,9 @@ class NodoAFD: public Nodo
 	int tamano();
 	void ordena();
 	void agrega(Nodo* ob);
-	NodoAFND* obtenElemento(int n);
-	bool operator== (Nodo& param);
+	Nodo* obtenElemento(int n);
+	bool operator== (NodoAFD& param);
 	private:
-	std::list<NodoAFND> nodosContenidos;
+	std::list<Nodo> nodosContenidos;
 };
 #endif

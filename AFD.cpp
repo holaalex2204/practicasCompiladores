@@ -12,18 +12,18 @@ void AFD::imprime()
 {
 	
 }
-NodoAFD* AFD::contiene(NodoAFD pa)
+NodoAFD* AFD::contiene(NodoAFD* pa)
 {
 	std::list<NodoAFD>::iterator it;
 	for (it=nodosGenerados.begin(); it!=nodosGenerados.end(); ++it)
 	{
-		if (it->operator==(pa)) {
+		if (it->operator==(*pa)) {
 			return &(*it);
 		}
 	}
 	return 0;
 }
-void AFD::busca(NodoAFND* pa,char simbolo, NodoAFD* visitados )
+void AFD::busca(Nodo* pa,char simbolo, NodoAFD* visitados )
 {
 	for (int i = 0; i<pa->cuentaTransiciones(); i++) {
 		if (pa->obtenTransicion(i)->obtenSimbolo()==simbolo) {
@@ -51,5 +51,6 @@ NodoAFD* AFD::generaEstados(NodoAFD* pa,char simbolo)
 	else
 	{
 		nodosGenerados.insert(nodosGenerados.end(),*temp);
+		return &(*nodosGenerados.end());
 	}
 }

@@ -13,10 +13,10 @@ class AFD
 private:
 	AFND* thompson;
 	std::list<NodoAFD> nodosGenerados;
-	NodoAFD* contiene(NodoAFD pa);
-	NodoAFD* generaEstados(NodoAFND* pa,char simbolo);
+	NodoAFD* contiene(NodoAFD* pa);
+	NodoAFD* generaEstados(NodoAFD* pa,char simbolo);
 	std::list<char> simbolos;
-	void busca(NodoAFND* pa,char simbolo, NodoAFD* visitados );
+	void busca(Nodo* pa,char simbolo, NodoAFD* visitados);
 };
 
 #endif
