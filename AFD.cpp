@@ -25,5 +25,8 @@ NodoAFD* AFD::contiene(NodoAFD pa)
 }
 NodoAFD* AFD::generaEstados(NodoAFD* pa,char simbolo)
 {
-	
+	NodoAFD* temp = new NodoAFD();
+	for (int i = 0; i<pa->tamano(); i++) {
+		<#statements#>
+	}
 }

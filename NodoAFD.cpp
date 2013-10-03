@@ -34,6 +34,9 @@ void NodoAFD::ordena()
 }
 void NodoAFD::agrega(NodoAFND* ob)
 {
+	if (contiene(ob)) {
+		return;
+	}
 	nodosContenidos.push_back(*ob);
 }
 bool NodoAFD::operator== (NodoAFD& param)
