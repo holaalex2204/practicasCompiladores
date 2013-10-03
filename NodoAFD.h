@@ -14,10 +14,8 @@ class NodoAFD: public Nodo
 	void ordena();
 	void agrega(NodoAFND* ob);
 	NodoAFND* obtenElemento(int n);
+	bool operator== (NodoAFD& param);
 	private:
-		//AFD conjunto;
 	std::list<NodoAFND> nodosContenidos;
-	
-	
 };
 #endif

@@ -1,5 +1,6 @@
 #include "NodoAFD.h"
 #include <iostream>
+#include <set>
 NodoAFD::NodoAFD()
 {
 	identificador = 0;
@@ -35,4 +36,16 @@ void NodoAFD::agrega(NodoAFND* ob)
 {
 	nodosContenidos.push_back(*ob);
 }
-
+bool NodoAFD::operator== (NodoAFD& param)
+{
+	std::list<NodoAFND>::iterator it;
+	std::list<NodoAFND>::iterator it2;
+	if (param.tamano() != this->tamano()) { // checa si tienen diferente tamaño
+		return false;
+	}
+	for (it=nodosContenidos.begin(), it2 =param.nodosContenidos.begin(); it!=nodosContenidos.end(); ++it, ++it2)
+		if (it2->getIdentificador()!=it->getIdentificador()) {
+			return false;
+		}
+	return true;
+}
