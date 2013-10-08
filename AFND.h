@@ -14,10 +14,11 @@ class AFND
 	explicit AFND(NodoAS* pos);
 	~AFND();
 	bloque procesaPos(NodoAS* pos);
+	bloque thompson;
 	void imprime();
 	private:
 	int estados;
-	bloque thompson;
+	
 	bloque creaSimbolo(char a);
 	bloque creaConcatenacion(bloque izq, bloque der);
 	bloque creaOr(bloque izq, bloque der);

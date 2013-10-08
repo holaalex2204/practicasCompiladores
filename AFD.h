@@ -14,9 +14,9 @@ private:
 	AFND* thompson;
 	std::list<NodoAFD> nodosGenerados;
 	NodoAFD* contiene(NodoAFD* pa);
-	NodoAFD* generaEstados(NodoAFD* pa,char simbolo);
 	std::list<char> simbolos;
 	void busca(Nodo* pa,char simbolo, NodoAFD* visitados);
+	void buscaEpsilons(NodoAFD* estadoPorEpsilonear);
 };
 
 #endif

@@ -3,6 +3,34 @@
 AFD::AFD(AFND* th, std::list<char> s)
 {
 	thompson = th;
+	NodoAFD* temp = new NodoAFD();
+	temp->agrega(th->thompson.ini);
+	buscaEpsilons(temp);
+	nodosGenerados.push_back(*temp);
+	std::list<NodoAFD>::iterator it;
+	std::list<char>::iterator simb;
+	for (it=nodosGenerados.begin(); it!=nodosGenerados.end(); ++it)
+	{
+		for (simb=s.begin(); simb!=s.end(); ++simb)
+		{
+			temp = new NodoAFD();
+			for (int i = 0; i< it->tamano(); i++) {
+				busca(it->obtenElemento(i),*simb,temp);
+			}
+			buscaEpsilons(temp);
+			if (temp->tamano()>0) {
+				if (contiene(temp) == 0) {
+					temp->setIdentificador(nodosGenerados.size());
+					nodosGenerados.push_back(*temp);
+				}
+				else
+				{
+					temp = contiene(temp);
+				}
+				it->agregarTransicion(*simb,temp);
+			}
+		}
+	}
 }
 AFD::~AFD()
 {
@@ -10,7 +38,23 @@ AFD::~AFD()
 }
 void AFD::imprime()
 {
-	
+	std::list<NodoAFD>::iterator it;
+	std::cout << "AFD GENERADO CON ALGORITMO DE CONJUNTOS" << std::endl;
+	for (it=nodosGenerados.begin(); it!=nodosGenerados.end(); ++it)
+	{
+		std::cout << "INFO NODO " << it->getIdentificador() << std::endl;
+		for (int i = 0; i< it->cuentaTransiciones(); i++) {
+			std::cout << "\tTransicion a " << it->obtenTransicion(i)->obtenDestino()->getIdentificador() << " con " << it->obtenTransicion(i)->obtenSimbolo()<< std::endl;
+		}
+		if (it->contiene(thompson->thompson.fin)) {
+			std::cout << "\tEste nodo es final" << std::endl;
+		}
+		std::cout << "\tLos elementos de este nodo son:";
+		for (int  i = 0 ; i< it->tamano(); i++) {
+			std::cout << " " << it->obtenElemento(i)->getIdentificador();
+		}
+		std:: cout << std::endl;
+	}
 }
 NodoAFD* AFD::contiene(NodoAFD* pa)
 {
@@ -26,31 +70,18 @@ NodoAFD* AFD::contiene(NodoAFD* pa)
 void AFD::busca(Nodo* pa,char simbolo, NodoAFD* visitados )
 {
 	for (int i = 0; i<pa->cuentaTransiciones(); i++) {
-		if (pa->obtenTransicion(i)->obtenSimbolo()==simbolo) {
-			if (!visitados->contiene(pa->obtenTransicion(i)->obtenDestino())) // checa si no se ha visitado ese elemento
+		if (pa->obtenTransicion(i)->obtenSimbolo()==simbolo)
+		{
+			if (visitados->contiene(pa->obtenTransicion(i)->obtenDestino())==0) // checa si no se ha visitado ese elemento
 			{
 				visitados->agrega(pa->obtenTransicion(i)->obtenDestino());
-				busca(pa->obtenTransicion(i)->obtenDestino(),simbolo,visitados);
 			}
 		}
 	}
 }
-NodoAFD* AFD::generaEstados(NodoAFD* pa,char simbolo)
+void AFD::buscaEpsilons(NodoAFD* estadoPorEpsilonear)
 {
-	NodoAFD* temp = new NodoAFD();
-	for (int i = 0; i<pa->tamano(); i++) {
-		busca(pa->obtenElemento(i),simbolo,temp);
-	}
-	for (int i = 0; i<temp->tamano(); i++) {
-		busca(temp->obtenElemento(i),'e',temp); //busca con epsilons a partir de los eodos generados
-	}
-	if (contiene(temp)) //checa si el edo generado ya existe
-	{
-		return contiene(temp);
-	}
-	else
-	{
-		nodosGenerados.insert(nodosGenerados.end(),*temp);
-		return &(*nodosGenerados.end());
+	for (int i = 0; i<estadoPorEpsilonear->tamano(); i++) {
+		busca(estadoPorEpsilonear->obtenElemento(i),'e',estadoPorEpsilonear);
 	}
 }

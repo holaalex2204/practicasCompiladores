@@ -1,8 +1,10 @@
 #ifndef EXPREG_H
 #define EXPREG_H
+#include <list>
 #include <string>
 #include "ArbolSintactico.h"
 #include "AFND.h"
+#include "AFD.h"
 class ExpReg
 {
 	public:
@@ -14,6 +16,10 @@ class ExpReg
 	bool esConcatenable(char a, char b);
 	ArbolSintactico* arbolS;
 	AFND* thompson;
-	void crearArbolSintactico(int ini, int fin, NodoAS* papi); // crea el arbol sintactico usando como parámetro un rango pendiente de generar en la cadena asi como la posicion en el arbol en la que quedo.
+	AFD* conjuntos;
+	void crearArbolSintactico(int ini, int fin, NodoAS* papi);
+	std::list<char> simbolos;
+	void obtenSimbolos();
+	// crea el arbol sintactico usando como parámetro un rango pendiente de generar en la cadena asi como la posicion en el arbol en la que quedo.
 };
 #endif

@@ -23,7 +23,9 @@ ExpReg::ExpReg(std::string expresion)
 	crearArbolSintactico(0,cadena.size()-1,arbolS->obtenRaiz());
 	thompson = new AFND(arbolS->obtenRaiz()->obtenIzq());
 	thompson->imprime();
-	
+	obtenSimbolos();
+	conjuntos = new AFD(thompson,simbolos);
+	conjuntos->imprime();
 }
 ExpReg::~ExpReg()
 {
@@ -223,6 +225,11 @@ ArbolSintactico* ExpReg::obtenArbolSintactico()
 {
 	return arbolS;
 }
-
+void ExpReg::obtenSimbolos()
+{
+	simbolos.push_back('a');
+	simbolos.push_back('b');
+		//simbolos.push_back('c');
+}
 
 
