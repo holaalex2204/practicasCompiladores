@@ -19,11 +19,11 @@ ExpReg::ExpReg(std::string expresion)
 		}
 	}
 	std::cout << "La cadena con signos de concatenación es: "<< cadena << std::endl;
+	obtenSimbolos();
 	arbolS = new ArbolSintactico();
 	crearArbolSintactico(0,cadena.size()-1,arbolS->obtenRaiz());
 	thompson = new AFND(arbolS->obtenRaiz()->obtenIzq());
-	thompson->imprime();
-	obtenSimbolos();
+	thompson->imprime();	
 	conjuntos = new AFD(thompson,simbolos);
 	conjuntos->imprime();
 }
@@ -227,9 +227,21 @@ ArbolSintactico* ExpReg::obtenArbolSintactico()
 }
 void ExpReg::obtenSimbolos()
 {
-	simbolos.push_back('a');
-	simbolos.push_back('b');
-		//simbolos.push_back('c');
+	std::list<char>::iterator simb;
+	for (unsigned long i = 0 ; i<cadena.size(); i++) {
+		if (cadena.at(i)!='(' & cadena.at(i)!=')' & cadena.at(i)!='|' & cadena.at(i)!='.' &
+			cadena.at(i)!='*' &cadena.at(i)!='+') {
+			if (cadena.find_first_of(cadena.at(i))==i) {
+				simbolos.push_back(cadena.at(i));
+			}
+		}
+	}
+	std:: cout << "Los simbolos usados en esta expresión son: ";
+	for (simb=simbolos.begin(); simb!=simbolos.end(); ++simb)
+	{
+		std::cout << "  " << *simb ;
+	}
+	std::cout << std::endl;
 }
 
 
