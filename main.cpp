@@ -14,6 +14,8 @@ int main()
 		cout << "El arbol sintáctico es el siguiente: (hijoizq)papa(hijoderecho)" << endl;
 		expresion->obtenArbolSintactico()->imprime(expresion->obtenArbolSintactico()->obtenRaiz());
 		cout << endl;
+		expresion->obtenArbolSintactico()->imprimeAnulabilidad(expresion->obtenArbolSintactico()->obtenRaiz());
+		cout << endl;
 		expresion->~ExpReg();
 	}
 	 

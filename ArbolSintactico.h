@@ -8,9 +8,14 @@ class ArbolSintactico
 		
 		~ArbolSintactico();
 		NodoAS* obtenRaiz();
-	void imprime(NodoAS* pos);//imprime los valroes del arbol en preorden
-		//aqui van a ir muchas operaciones pero despues en otras practicas
+		void imprime(NodoAS* pos);//imprime los valroes del arbol en preorden
+		void imprimeAnulabilidad(NodoAS* pos);
+		void asignaIndices(NodoAS* pos);
+		void calculaPrimeros();
+		void calculaUltimos();
+		void calculaSiguientes();		
 	private:
+		int indice;
 		NodoAS* raiz;
 };
 #endif

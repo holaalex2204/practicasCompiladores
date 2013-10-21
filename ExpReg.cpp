@@ -21,7 +21,15 @@ ExpReg::ExpReg(std::string expresion)
 	std::cout << "La cadena con signos de concatenación es: "<< cadena << std::endl;
 	obtenSimbolos();
 	arbolS = new ArbolSintactico();
+		//Inicia construcción del árbol Sintáctico
 	crearArbolSintactico(0,cadena.size()-1,arbolS->obtenRaiz());
+	arbolS->asignaIndices(arbolS->obtenRaiz());
+	arbolS->calculaPrimeros();
+	arbolS->calculaUltimos();
+	arbolS->calculaSiguientes();
+		//Finaliza la construcción del árbol sintáctico
+	arbolS->imprime(arbolS->obtenRaiz());
+	arbolS->imprimeAnulabilidad(arbolS->obtenRaiz());
 	thompson = new AFND(arbolS->obtenRaiz()->obtenIzq());
 	thompson->imprime();	
 	conjuntos = new AFD(thompson,simbolos);
@@ -46,6 +54,7 @@ void ExpReg::crearArbolSintactico(int ini, int fin, NodoAS* papi)
 	int nivel = 0;
 	int aux1 =0;
 	int aux2 = 0;
+	std::cout << ini << " " << fin << std::endl;
 	if (ini == fin) { //es un simbolo
 		if (papi->obtenIzq()==0) {
 			papi->agregaIzq(new SimboloAS(cadena.at(ini)));
@@ -69,19 +78,15 @@ void ExpReg::crearArbolSintactico(int ini, int fin, NodoAS* papi)
 				papi->agregaIzq(new OrAS());
 				aux1 = ini;
 				aux2 = i-1;
-				if (cadena.compare(aux1,1,"(")==0) {
+				if (cadena.compare(aux1,1,"(")==0 &&cadena.compare(aux2,1,")")==0) {
 					aux1= aux1+1;
-				}
-				if (cadena.compare(aux2,1,")") ==0){
 					aux2 = aux2-1;
 				}
 				crearArbolSintactico(aux1,aux2,papi->obtenIzq());
 				aux1 = i+1;
 				aux2 = fin;
-				if (cadena.compare(aux1,1,"(")==0) {
+				if (cadena.compare(aux1,1,"(")==0&&cadena.compare(aux2,1,")")==0)  {
 					aux1= aux1+1;
-				}
-				if (cadena.compare(aux2,1,")")==0) {
 					aux2 = aux2-1;
 				}
 				crearArbolSintactico(aux1,aux2,papi->obtenIzq());
@@ -92,19 +97,15 @@ void ExpReg::crearArbolSintactico(int ini, int fin, NodoAS* papi)
 				papi->agregaDer(new OrAS());
 				aux1 = ini;
 				aux2 = i-1;
-				if (cadena.compare(aux1,1,"(")==0) {
+				if (cadena.compare(aux1,1,"(")==0&&cadena.compare(aux2,1,")")==0)  {
 					aux1= aux1+1;
-				}
-				if (cadena.compare(aux2,1,")")==0) {
 					aux2 = aux2-1;
 				}
 				crearArbolSintactico(aux1,aux2,papi->obtenDer());
 				aux1 = i+1;
 				aux2 = fin;
-				if (cadena.compare(aux1,1,"(")==0) {
+				if (cadena.compare(aux1,1,"(")==0&&cadena.compare(aux2,1,")")==0)  {
 					aux1= aux1+1;
-				}
-				if (cadena.compare(aux2,1,")")==0) {
 					aux2 = aux2-1;
 				}
 				crearArbolSintactico(aux1,aux2,papi->obtenDer());
@@ -126,19 +127,15 @@ void ExpReg::crearArbolSintactico(int ini, int fin, NodoAS* papi)
 				papi->agregaIzq(new ConcatAS());
 				aux1 = ini;
 				aux2 = i-1;
-				if (cadena.compare(aux1,1,"(")==0) {
+				if (cadena.compare(aux1,1,"(")==0&&cadena.compare(aux2,1,")")==0)  {
 					aux1= aux1+1;
-				}
-				if (cadena.compare(aux2,1,")") ==0){
 					aux2 = aux2-1;
 				}
 				crearArbolSintactico(aux1,aux2,papi->obtenIzq());
 				aux1 = i+1;
 				aux2 = fin;
-				if (cadena.compare(aux1,1,"(")==0) {
+				if (cadena.compare(aux1,1,"(")==0&&cadena.compare(aux2,1,")")==0)  {
 					aux1= aux1+1;
-				}
-				if (cadena.compare(aux2,1,")")==0) {
 					aux2 = aux2-1;
 				}
 				crearArbolSintactico(aux1,aux2,papi->obtenIzq());
@@ -149,19 +146,15 @@ void ExpReg::crearArbolSintactico(int ini, int fin, NodoAS* papi)
 				papi->agregaDer(new ConcatAS());
 				aux1 = ini;
 				aux2 = i-1;
-				if (cadena.compare(aux1,1,"(")==0) {
+				if (cadena.compare(aux1,1,"(")==0&&cadena.compare(aux2,1,")")==0)  {
 					aux1= aux1+1;
-				}
-				if (cadena.compare(aux2,1,")")==0) {
 					aux2 = aux2-1;
 				}
 				crearArbolSintactico(aux1,aux2,papi->obtenDer());
 				aux1 = i+1;
 				aux2 = fin;
-				if (cadena.compare(aux1,1,"(")==0) {
+				if (cadena.compare(aux1,1,"(")==0&&cadena.compare(aux2,1,")")==0)  {
 					aux1= aux1+1;
-				}
-				if (cadena.compare(aux2,1,")")==0) {
 					aux2 = aux2-1;
 				}
 				crearArbolSintactico(aux1,aux2,papi->obtenDer());
@@ -188,10 +181,8 @@ void ExpReg::crearArbolSintactico(int ini, int fin, NodoAS* papi)
 				}
 				aux1 = ini;
 				aux2 = i-1;
-				if (cadena.compare(aux1,1,"(")==0) {
+				if (cadena.compare(aux1,1,"(")==0&&cadena.compare(aux2,1,")") ==0) {
 					aux1= aux1+1;
-				}
-				if (cadena.compare(aux2,1,")")==0) {
 					aux2 = aux2-1;
 				}
 				crearArbolSintactico(aux1,aux2,papi->obtenIzq());
@@ -208,10 +199,8 @@ void ExpReg::crearArbolSintactico(int ini, int fin, NodoAS* papi)
 				}
 				aux1 = ini;
 				aux2 = i-1;
-				if (cadena.compare(aux1,1,"(")==0) {
+				if (cadena.compare(aux1,1,"(")==0&&cadena.compare(aux2,1,")")==0)  {
 					aux1= aux1+1;
-				}
-				if (cadena.compare(aux2,1,")")==0) {
 					aux2 = aux2-1;
 				}
 				crearArbolSintactico(aux1,aux2,papi->obtenDer());

@@ -14,5 +14,11 @@ class SimboloAS:public NodoAS
 	NodoAS* obtenDer();
 	void agregaIzq(NodoAS* n);
 	void agregaDer(NodoAS* n);
+	void asignaIndice(int n);
+	void calculaPrimeros();
+	void calculaUltimos();
+private:
+	int ind;
+	
 };
 #endif

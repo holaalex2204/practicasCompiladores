@@ -14,5 +14,7 @@ class CerraduraEstAS: public NodoAS
 	NodoAS* obtenDer();
 	void agregaIzq(NodoAS* n);
 	void agregaDer(NodoAS* n);
+	void calculaUltimos();
+	
 };
 #endif

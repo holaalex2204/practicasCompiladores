@@ -40,5 +40,20 @@ void SimboloAS::agregaDer(NodoAS* n)
 {
 	return; // NO SE AGREGA
 }
+void SimboloAS::asignaIndice(int n)
+{
+	ind = n;
+	return; // NO SE AGREGA
+}
+void SimboloAS::calculaPrimeros()
+{
+	primeros.clear();
+	primeros.insert(ind);
+}
+void SimboloAS::calculaUltimos()
+{
+	ultimos.clear();
+	ultimos.insert(ind);
+}
 
 

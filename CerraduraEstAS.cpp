@@ -40,6 +40,16 @@ void CerraduraEstAS::agregaDer(NodoAS* n)
 {
 		//no puede tener hijo derecho
 }
+void CerraduraEstAS::calculaUltimos()
+{
+	ultimos.clear();
+	obtenIzq()->calculaUltimos();
+	std::set<int> myset = obtenIzq()->obtenUltimos();
+	for (std::set<int>::iterator it=myset.begin(); it!=myset.end(); ++it)
+	{
+		ultimos.insert(*it);
+	}
+}
 
 
 

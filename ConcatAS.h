@@ -14,5 +14,8 @@ class ConcatAS:public NodoAS
 	NodoAS* obtenDer();
 	void agregaIzq(NodoAS* n);
 	void agregaDer(NodoAS* n);
+	void calculaPrimeros();
+	void calculaUltimos();
+	void calculaSiguientes();
 };
 #endif
